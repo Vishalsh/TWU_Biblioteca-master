@@ -29,6 +29,14 @@ public class LibraryTest {
     }
 
     @Test
+    public void shouldGetTheListOfAllMovies() {
+        List<Movie> movie_list = new ArrayList<Movie>();
+        movie_list.add(new Movie("Veer Zara", 2004, "Yash Chopra", "5"));
+        movie_list.add(new Movie("LOC Kargil", 2001, "JP Datta", "4"));
+        assertEquals(movie_list.get(0).getName(), new MovieList().getMovieList().get(0).getName());
+    }
+
+    @Test
     public void shouldReserveABookIfPresentInTheList() {
         List<Book> book_list = new ArrayList<Book>();
         book_list.add(new Book(1, "Java", "Khalid Mughal", 500, "available"));
@@ -48,4 +56,5 @@ public class LibraryTest {
         Library library = new Library();
         assertEquals("Please talk to a librarian, Thank you", library.getFunctionalityDone(3));
     }
+
 }

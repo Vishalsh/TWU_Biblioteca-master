@@ -7,6 +7,8 @@ public class Library {
 
     BookList bookList = new BookList();
 
+    MovieList movieList = new MovieList();
+
     public String getFunctionalityDone(int option) {
         switch(option) {
             case 1:
@@ -17,6 +19,9 @@ public class Library {
                 return getBookReserved(new Scanner(System.in).next());
             case 3:
                 return getMembershipDetails();
+            case 4:
+                getMovieList();
+                break;
             default:
                 return getErrorMessage();
         }
@@ -33,6 +38,14 @@ public class Library {
 
     private String getErrorMessage() {
         return "Select A Valid Option!!!";
+    }
+
+    public void getMovieList() {
+        List<Movie> movie_list = movieList.getMovieList();
+        System.out.println("Name  Year  Director  Rating");
+        for(Movie movie : movie_list) {
+            System.out.println(movie.getName() + "  " + movie.getYear() + "  " + movie.getDirector() + "  " + movie.getRating());
+        }
     }
 
     public void getBookList() {

@@ -14,7 +14,7 @@ public class LibraryTest {
     @Test
     public void shouldAssertErrorMessageForInvalidOption() {
         Library library = new Library();
-        assertEquals("Select A Valid Option!!!", library.getFunctionalityDone(4));
+        assertEquals("Select A Valid Option!!!", library.getFunctionalityDone(6));
     }
 
     @Test
@@ -52,9 +52,27 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldGetMembershipDetails() {
+    public void shouldGetMembershipDetailsIfLoggedIn() {
+        Library library = new Library();
+        library.userList.user_list.get(0).setStatus("loggedIn");
+        assertEquals("vishal  vishal@gmail.com  9878789878", library.getFunctionalityDone(3));
+    }
+
+    @Test
+    public void shouldNotGetMembershipDetailsIfNotLoggedIn() {
         Library library = new Library();
         assertEquals("Please talk to a librarian, Thank you", library.getFunctionalityDone(3));
     }
 
+    @Test
+    public void shouldLogInIfRightCredentialsAreProvided() {
+        Library library = new Library();
+        assertEquals("You are logged In now", library.getLoggedIn("111-1111", "vishal111-1111"));
+    }
+
+    @Test
+    public void shouldNotLogInIfWrongCredentialsAreProvided() {
+        Library library = new Library();
+        assertEquals("Wrong username or password", library.getLoggedIn("111-1119", "vishal111-1111"));
+    }
 }

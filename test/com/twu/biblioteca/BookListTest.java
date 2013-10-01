@@ -20,4 +20,11 @@ public class BookListTest {
         book_list.add(new Book(5, "OS", "Red Book", 550, "available"));
         assertEquals(book_list.get(0).getAuthorName(), new BookList().getBookList().get(0).getAuthorName());
     }
+
+    @Test
+    public void shouldSearchForTheBook() {
+        BookList bookList = new BookList();
+        assertEquals(bookList.searchBook("Java"), "Thanks You! Enjoy the book.");
+        assertEquals(bookList.searchBook("abc"), "Sorry we don't have that book yet.");
+    }
 }

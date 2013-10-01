@@ -9,19 +9,25 @@ public class Library {
 
     MovieList movieList = new MovieList();
 
+    UserList userList = new UserList();
+
     public String getFunctionalityDone(int option) {
+        Scanner sc = new Scanner(System.in);
         switch(option) {
             case 1:
                 getBookList();
                 break;
             case 2:
                 System.out.println("Please enter the name of the book");
-                return getBookReserved(new Scanner(System.in).next());
+                return getBookReserved(sc.next());
             case 3:
                 return getMembershipDetails();
             case 4:
                 getMovieList();
                 break;
+            case 5:
+                System.out.println("Please enter your Username and password");
+                return getLoggedIn(sc.next(), sc.next());
             default:
                 return getErrorMessage();
         }
@@ -29,7 +35,13 @@ public class Library {
     }
 
     private String getMembershipDetails() {
-        return "Please talk to a librarian, Thank you";
+        User user = userList.searchForLoggedInUser();
+        if (user == null)
+        {
+            return "Please talk to a librarian, Thank you";
+        }
+            System.out.println("Name  Email  PhoneNumber");
+            return user.getName()+ "  " + user.getEmail() + "  "  + user.getPhoneNumber();
     }
 
     public String getBookReserved(String book_name) {
@@ -38,6 +50,14 @@ public class Library {
 
     private String getErrorMessage() {
         return "Select A Valid Option!!!";
+    }
+
+    public String getLoggedIn(String username, String password) {
+        User user = userList.searchUser(username, password);
+        if(user == null) {
+            return "Wrong username or password";
+        }
+        return "You are logged In now";
     }
 
     public void getMovieList() {
